@@ -290,7 +290,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
     	wc.lpfnWndProc = WindowProc;
     	wc.hInstance = hInstance;
-    	wc.lpszClassName = "MyWindowClass"; // Using wide-character string literal
+    	wc.lpszClassName = "MyWindowClass";
 
     	RegisterClass(&wc);
 
@@ -327,25 +327,24 @@ void leftClick() {
 	INPUT input = {0};
     	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
-        SendInput(1, &input, sizeof(INPUT)); // Pass the address of input using &
+        SendInput(1, &input, sizeof(INPUT));
 
 	input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
-	SendInput(1, &input, sizeof(INPUT)); // Pass the address of input using &
+	SendInput(1, &input, sizeof(INPUT));
 }
 void rightClick() {
 	INPUT input = {0};
     	input.type = INPUT_MOUSE;
 	input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
-    	SendInput(1, &input, sizeof(INPUT)); // Pass the address of input using &
+    	SendInput(1, &input, sizeof(INPUT));
 
     	input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
-    	SendInput(1, &input, sizeof(INPUT)); // Pass the address of input using &
+    	SendInput(1, &input, sizeof(INPUT));
 }
 bool isKeyPressed(int key) {
 	return GetAsyncKeyState(key) & 0x8000;
 }
 DWORD WINAPI autoclick(LPVOID lpParam) {
-    	// Cast the parameter to the appropriate type if needed
     	int* delayPtr = reinterpret_cast<int*>(lpParam);
 	int delay = *delayPtr;
 	while(checking_input_to_autoclick) {
